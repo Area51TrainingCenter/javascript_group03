@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style type="text/css">
+    body {
+      background: white;
+    }
+    @media (max-width: 300px)  {
+      body {
+        background: black;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script type="text/javascript">
+    var h1 = document.createElement('h1');
+    h1.textContent = 'Título del documento';
+    document.body.appendChild(h1);
+
+    var h2 = document.createElement('h2');
+    h2.textContent = 'Subtítulo del documento';
+    document.body.insertBefore(h2, h1);
+    document.body.insertBefore(h1, h2);
+
+    h1.setAttribute('style', 'text-decoration: underline');
+  </script>
+</body>
+</html>
