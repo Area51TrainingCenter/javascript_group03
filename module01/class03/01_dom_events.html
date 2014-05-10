@@ -42,6 +42,23 @@
     var outer = document.getElementById('outer'),
         middle = document.getElementById('middle'),
         inner = document.getElementById('inner');
+
+    outer.addEventListener('click', function(e) {
+      console.log('click:outer');
+    }, true);
+
+    middle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      console.log('click:middle');
+    }, true);
+
+    window.addEventListener('click', function(e) {
+      console.log('click:window');
+    }, true);
+
+    inner.addEventListener('click', function(e) {
+      console.log('click:inner');
+    }, true);
   </script>
 </body>
 </html>

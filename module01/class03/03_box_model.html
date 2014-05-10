@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Box model</title>
+  <style type="text/css">
+    #input_text {
+      display: block;
+      width: 150px;
+      height: 15px;
+      margin: 20px;
+      padding: 10px;
+      border: solid 5px #bdc3c7;
+    }
+
+    #bounding_rectangle {
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      background: rgba(230, 126, 34, 0.5);
+    }
+
+    #client_rectangle {
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      background: rgba(46, 204, 113, 0.35);
+    }
+  </style>
+</head>
+<body>
+  <input type="text" id="input_text" />
+  <div id="bounding_rectangle">
+    <div id="client_rectangle"></div>
+  </div>
+  <script type="text/javascript">
+    var inputText = document.getElementById('input_text'),
+        boundingRectangle = document.getElementById('bounding_rectangle'),
+        clientRectangle = document.getElementById('client_rectangle');
+
+    var inputTextBoundingRectangle = inputText.getBoundingClientRect();
+
+    boundingRectangle.style.width = inputTextBoundingRectangle.width + 'px';
+    boundingRectangle.style.height = inputTextBoundingRectangle.height + 'px';
+    boundingRectangle.style.left = inputTextBoundingRectangle.left + 'px';
+    boundingRectangle.style.top = inputTextBoundingRectangle.top + 'px';
+
+    clientRectangle.style.width = inputText.clientWidth + 'px';
+    clientRectangle.style.height = inputText.clientHeight + 'px';
+    clientRectangle.style.left = inputText.clientLeft + 'px';
+    clientRectangle.style.top = inputText.clientTop + 'px';
+
+  </script>
+</body>
+</html>

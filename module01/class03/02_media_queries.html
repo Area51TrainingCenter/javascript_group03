@@ -4,6 +4,12 @@
   <meta charset="utf-8" />
   <title>Media queries</title>
   <style type="text/css">
+    html, body {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
     @media screen and (device-width: 320px) and (device-height: 480px) {
       body {
         background: #d35400; /* Naranja */
@@ -33,6 +39,24 @@
         background: #c0392b; /* Rojo */
       }
     }
+
+    @media screen and (device-width: 240px) {
+      body.load {
+        background: url('https://farm3.staticflickr.com/2326/2378867408_4cc90791d6_m.jpg') no-repeat;
+      }
+    }
+
+    @media screen and (device-width: 500px) {
+      body.load {
+        background: url('https://farm3.staticflickr.com/2326/2378867408_4cc90791d6.jpg') no-repeat;
+      }
+    }
+
+    @media screen and (device-width: 640px) {
+      body.load {
+        background: url('https://farm3.staticflickr.com/2326/2378867408_4cc90791d6_z.jpg?zz=1') no-repeat;
+      }
+    }
   </style>
 </head>
 <body>
@@ -54,6 +78,54 @@
     mediaQueryAzul.addListener(matchMediaQuery);
     mediaQueryMorado.addListener(matchMediaQuery);
     mediaQueryRojo.addListener(matchMediaQuery);
+
+    var mediaQuery240 = window.matchMedia('screen and (device-width: 240px)'),
+        mediaQuery500 = window.matchMedia('screen and (device-width: 500px)'),
+        mediaQuery640 = window.matchMedia('screen and (device-width: 640px)');
+
+    var image240,
+        image500,
+        image640;        
+
+    function loadImage(mediaQuery) {
+      if (mediaQuery.matches) {
+        if (mediaQuery.media.indexOf('240px') !== -1) {
+          if (image240 === undefined) {
+            image240 = new Image();
+            image240.src = 'https://farm3.staticflickr.com/2326/2378867408_4cc90791d6_m.jpg';
+            image240.addEventListener('load', function() {
+              document.body.classList.add('load');
+            });
+          }
+        }
+        if (mediaQuery.media.indexOf('500px') !== -1) {
+          if (image500 === undefined) {
+            image500 = new Image();
+            image500.src = 'https://farm3.staticflickr.com/2326/2378867408_4cc90791d6.jpg';
+            image500.addEventListener('load', function() {
+              document.body.classList.add('load');
+            });
+          }
+        }
+        if (mediaQuery.media.indexOf('640px') !== -1) {
+          if (image640 === undefined) {
+            image640 = new Image();
+            image640.src = 'https://farm3.staticflickr.com/2326/2378867408_4cc90791d6_z.jpg?zz=1';
+            image640.addEventListener('load', function() {
+              document.body.classList.add('load');
+            });
+          }
+        }
+      }
+    }
+
+    mediaQuery240.addListener(loadImage);
+    mediaQuery500 .addListener(loadImage);
+    mediaQuery640.addListener(loadImage);
+
+    loadImage(mediaQuery240);
+    loadImage(mediaQuery500);
+    loadImage(mediaQuery640);
   </script>
 </body>
 </html>
