@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Media queries</title>
+  <style type="text/css">
+    @media screen and (device-width: 320px) and (device-height: 480px) {
+      body {
+        background: #d35400; /* Naranja */
+      }
+    }
+
+    @media screen and (device-width: 480px) and (device-height: 320px) {
+      body {
+        background: #27ae60; /* Verde */
+      }
+    }
+
+    @media screen and (device-width: 480px) and (device-height: 800px) {
+      body {
+        background: #2980b9; /* Azul */
+      }
+    }
+
+    @media screen and (device-aspect-ratio: 40/71) {
+      body {
+        background: #8e44ad; /* Morado */
+      }
+    }
+
+    @media screen and (device-aspect-ratio: 9/16) {
+      body {
+        background: #c0392b; /* Rojo */
+      }
+    }
+  </style>
+</head>
+<body>
+  <script type="text/javascript">
+    var mediaQueryNaranja = window.matchMedia('screen and (device-width: 320px) and (device-height: 480px)'),
+        mediaQueryVerde = window.matchMedia('screen and (device-width: 480px) and (device-height: 320px)'),
+        mediaQueryAzul = window.matchMedia('screen and (device-width: 480px) and (device-height: 800px)'),
+        mediaQueryMorado = window.matchMedia('screen and (device-aspect-ratio: 40/71)'),
+        mediaQueryRojo = window.matchMedia('screen and (device-aspect-ratio: 9/16)');
+
+    function matchMediaQuery(mediaQuery) {
+      if (mediaQuery.matches) {
+        console.log('match: ', mediaQuery);
+      }
+    }
+
+    mediaQueryNaranja.addListener(matchMediaQuery);
+    mediaQueryVerde.addListener(matchMediaQuery);
+    mediaQueryAzul.addListener(matchMediaQuery);
+    mediaQueryMorado.addListener(matchMediaQuery);
+    mediaQueryRojo.addListener(matchMediaQuery);
+  </script>
+</body>
+</html>
