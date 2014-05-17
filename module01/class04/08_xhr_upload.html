@@ -22,6 +22,10 @@
 
       var formData = new FormData(form);
 
+      xhr.addEventListener('progress', function(e) {
+        console.log(e.loaded, e.total);
+      });
+
       xhr.addEventListener('load', function() {
         console.log(xhr.responseText);
       });

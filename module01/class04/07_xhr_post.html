@@ -9,17 +9,24 @@
       <label for="message">Message:</label>
       <input type="text" name="message" id="message" value="testing" />
     </p>
+    <input type="submit" />
   </form>
   <script type="text/javascript">
     var xhr = new XMLHttpRequest(),
-        formData = new FormData(document.getElementById('xhr_form'));
+        form = document.getElementById('xhr_form');
 
     xhr.addEventListener('load', function() {
-      console.log(xhr.responseText);
+      console.log(JSON.parse(xhr.responseText));
     });
 
-    xhr.open('POST', 'http://0.0.0.0/post.php', true);
-    xhr.send(formData);
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      var formData = new FormData(form);
+
+      xhr.open('POST', 'http://0.0.0.0/post.php', true);
+      xhr.send(formData);
+    });
   </script>
 </body>
 </html>

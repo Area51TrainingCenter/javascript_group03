@@ -8,7 +8,7 @@
     var xhr = new XMLHttpRequest();
 
     xhr.addEventListener('load', function() {
-      console.log(xhr.responseText);
+      console.log(JSON.parse(xhr.responseText).length);
     });
 
     xhr.open('GET', 'http://coffeemaker.herokuapp.com/twitter.json?q=cappuccino', true);
