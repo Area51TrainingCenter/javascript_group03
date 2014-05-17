@@ -14,13 +14,13 @@
     var fileInput = document.getElementById('file_input'),
         container = document.getElementById('container');
 
-    fileInput.addEventListener('change', function() {
-      var file = fileInput.files[0],
-          reader = new FileReader(),
-          img = new Image();
+    fileInput.addEventListener('change', function(e) {
+      var file = e.target.files[0];
+      var reader = new FileReader();
 
-      reader.addEventListener('load', function() {
-        img.src = reader.result;
+      reader.addEventListener('load', function(e2) {
+        var img = document.createElement('img');
+        img.src = e2.target.result;
 
         container.appendChild(img);
       });

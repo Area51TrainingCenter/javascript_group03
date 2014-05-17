@@ -4,15 +4,32 @@
   <title>History API</title>
 </head>
 <body>
+  <a id="hash" href="#section_hash_1">Enlace con hash</a>
+  <a id="push_state" href="/section_push_state_1">Enlace con pushState</a>
   <script type="text/javascript">
-    window.addEventListener('popstate', function(e) {
-      console.log(e.state);
+    var pushStateLink = document.getElementById('push_state');
+
+    pushStateLink.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      var href = e.target.getAttribute('href');
+
+      history.pushState({ section: href }, null, href);
     });
 
-    history.pushState({section: 'section_1'}, null, '/section_1');
-    history.pushState({section: 'section_2'}, null, '/section_2');
-    history.pushState({section: 'section_3'}, null, '/section_3');
-    history.pushState({section: 'section_4'}, null, '/section_4');
+    window.addEventListener('popstate', function(e) {
+      console.log('popstate', e);
+    });
+
+    window.addEventListener('hashchange', function(e) {
+      console.log('hashchange', e);
+    })
+
+    // history.pushState no puede ser utilizado en archivos locales por tema de seguridad.
+    // history.pushState({section: 'section_1'}, null, '/section_1');
+    // history.pushState({section: 'section_2'}, null, '/section_2');
+    // history.pushState({section: 'section_3'}, null, '/section_3');
+    // history.pushState({section: 'section_4'}, null, '/section_4');
   </script>
 </body>
 </html>

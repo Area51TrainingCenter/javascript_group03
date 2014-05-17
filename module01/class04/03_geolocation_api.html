@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Geolocation API</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+  <script type="text/javascript" src="http://hpneo.github.io/gmaps/gmaps.js"></script>
+</head>
+<body>
+  <div id="map"></div>
+  <script type="text/javascript">
+    var map = new GMaps({
+      div: '#map',
+      lat: -12.043333,
+      lng: -77.028333,
+      enableNewStyle: true
+    });
+
+    // Geolocation API no puede ser utilizado en archivos locales por tema de seguridad.
+    // Probar este código en: http://hpneo.github.io/gmaps/
+    navigator.geolocation.getCurrentPosition(function(data) {
+      map.addMarker({
+        lat: data.coords.latitude,
+        lng: data.coords.longitude
+      });
+
+      map.drawCircle({
+        lat: data.coords.latitude,
+        lng: data.coords.longitude,
+        radius: data.coords.accuracy,
+        fillColor: 'rgba(41, 128, 185, 0.6)',
+        strokeColor: 'rgba(41, 128, 185,1.0)',
+        strokeWidth: 0.5
+      });
+      
+      map.setZoom(19);
+      map.setCenter(data.coords.latitude, data.coords.longitude);
+    }, function(error) {
+      console.log('error', error);
+    });
+  </script>
+</body>
+</html>
