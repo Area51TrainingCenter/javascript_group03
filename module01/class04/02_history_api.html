@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>History API</title>
+</head>
+<body>
+  <script type="text/javascript">
+    window.addEventListener('popstate', function(e) {
+      console.log(e.state);
+    });
+
+    history.pushState({section: 'section_1'}, null, '/section_1');
+    history.pushState({section: 'section_2'}, null, '/section_2');
+    history.pushState({section: 'section_3'}, null, '/section_3');
+    history.pushState({section: 'section_4'}, null, '/section_4');
+  </script>
+</body>
+</html>

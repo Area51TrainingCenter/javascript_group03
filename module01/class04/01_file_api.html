@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File API</title>
+</head>
+<body>
+  <p>
+    <label for="file_input">File:</label>
+    <input type="file" id="file_input" />
+  </p>
+  <div id="container"></div>
+
+  <script type="text/javascript">
+    var fileInput = document.getElementById('file_input'),
+        container = document.getElementById('container');
+
+    fileInput.addEventListener('change', function() {
+      var file = fileInput.files[0],
+          reader = new FileReader(),
+          img = new Image();
+
+      reader.addEventListener('load', function() {
+        img.src = reader.result;
+
+        container.appendChild(img);
+      });
+
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>

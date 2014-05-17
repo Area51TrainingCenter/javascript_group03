@@ -1,0 +1,27 @@
+<!DOCTYPE html
+<html>
+<head>
+  <title>Websocket API</title>
+</head>
+<body>
+  <script type="text/javascript">
+    var connection;
+    window.onload = function() {
+      connection = new WebSocket('ws://0.0.0.0:1234/global_channel');
+
+      connection.onopen = function() {
+        console.log("connected...");
+      };
+
+      connection.onclose = function() {
+        console.log("socket closed");
+      };
+
+      connection.onmessage = function(evt) {
+        message = JSON.parse(evt.data);
+        console.log('New message received: ', message);
+      };
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>XMLHttpRequest : Upload file</title>
+</head>
+<body>
+  <form id="xhr_form" method="post" enctype="multipart/form-data">
+    <p>
+      <label for="file">File:</label>
+      <input type="file" id="file" name="file" />
+    </p>
+    <p>
+      <input type="submit" />
+    </p>
+  </form>
+  <script type="text/javascript">
+    var xhr = new XMLHttpRequest(),
+        form = document.getElementById('xhr_form');
+    
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      var formData = new FormData(form);
+
+      xhr.addEventListener('load', function() {
+        console.log(xhr.responseText);
+      });
+
+      xhr.open('POST', 'http://0.0.0.0/post.php', true);
+      xhr.send(formData);
+    });
+  </script>
+</body>
+</html>

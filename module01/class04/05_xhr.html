@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>XMLHttpRequest : GET</title>
+</head>
+<body>
+  <script type="text/javascript">
+    var xhr = new XMLHttpRequest();
+
+    xhr.addEventListener('load', function() {
+      console.log(xhr.responseText);
+    });
+
+    xhr.open('GET', 'http://coffeemaker.herokuapp.com/twitter.json?q=cappuccino', true);
+    xhr.send();
+  </script>
+</body>
+</html>

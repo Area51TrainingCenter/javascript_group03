@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Promises</title>
+</head>
+<body>
+  <script type="text/javascript">
+    var promise = new Promise(function(resolve, reject) {
+      var xhr = new XMLHttpRequest();
+
+      xhr.addEventListener('load', function(e) {
+        resolve(xhr.responseText);
+      });
+
+      xhr.addEventListener('error', function(e) {
+        reject(e);
+      });
+
+      xhr.open('GET', 'http://coffeemaker.herokuapp.com/twitter.json?q=cappuccino', true);
+      xhr.send();
+    });
+
+    promise.then(function(data) {
+      console.log(JSON.parse(data));
+    });
+
+    promise.then(function(data) {
+      console.log(JSON.parse(data).length + ' tweets');
+    });
+  </script>
+</body>
+</html>
