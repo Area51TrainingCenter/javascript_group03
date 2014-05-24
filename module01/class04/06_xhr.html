@@ -11,7 +11,12 @@
       console.log(JSON.parse(xhr.responseText).length);
     });
 
+    xhr.addEventListener('timeout', function() {
+      console.log('La petición demoró en devolver información');
+    });
+
     xhr.open('GET', 'http://coffeemaker.herokuapp.com/twitter.json?q=cappuccino', true);
+    xhr.timeout = 1000;
     xhr.send();
   </script>
 </body>

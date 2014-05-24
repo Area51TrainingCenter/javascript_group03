@@ -22,11 +22,13 @@
 
     promise.then(function(data) {
       console.log(JSON.parse(data));
+    }).then(function(data) {
+      console.log(JSON.parse(data).length + ' tweets');
+    }).catch(function(e) {
+      console.log(e);
     });
 
-    promise.then(function(data) {
-      console.log(JSON.parse(data).length + ' tweets');
-    });
+
   </script>
 </body>
 </html>

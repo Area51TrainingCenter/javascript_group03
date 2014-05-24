@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Promises</title>
+</head>
+<body>
+  https://github.com/HPNeo/coffeemaker
+  <script type="text/javascript">
+    var URLS = [
+      'http://coffeemaker.herokuapp.com/twitter.json?q=cappuccino',
+      'http://coffeemaker.herokuapp.com/facebook.json?q=espresso',
+      'http://coffeemaker.herokuapp.com/foursquare.json?q[near]=Lima, PE&q[query]=Cafe',
+      'http://coffeemaker.herokuapp.com/instagram.json?q=latte'
+    ];
+
+    function getJSON(url) {
+      var promise = new Promise(function(resolve, reject) {
+        var xhr = new XMLHttpRequest();
+
+        xhr.addEventListener('load', function(e) {
+          var response = JSON.parse(xhr.responseText);
+          resolve(response);
+        });
+
+        xhr.addEventListener('error', function(e) {
+          reject(e, xhr);
+        });
+
+        xhr.open('GET', url, true);
+        xhr.send();
+      });
+
+      return promise;
+    }
+
+    var results = [];
+
+    // 1.
+
+    // var promises = URLS.map(function(url) {
+    //   var promise = getJSON(url).then(function(response) {
+    //     results.push(response);
+    //   });
+
+    //   promises.push(promise);
+    // });
+
+    // Promise.all(promises).then(function() {
+    //   console.log(results);
+    // });
+
+    // 2.
+
+    // var promiseTwitter = getJSON(URLS[0]);
+    // var promiseFacebook = getJSON(URLS[1]);
+    // var promiseFoursquare = getJSON(URLS[2]);
+    // var promiseInstagram = getJSON(URLS[3]);
+
+    // promiseTwitter.then(function(response) {
+    //   results.push(response);
+    // });
+
+    // promiseFacebook.then(function(response) {
+    //   results.push(response);
+    // });
+
+    // promiseFoursquare.then(function(response) {
+    //   results.push(response);
+    // });
+
+    // promiseInstagram.then(function(response) {
+    //   results.push(response);
+    // });
+
+    // Promise.all([promiseTwitter, promiseFacebook, promiseFoursquare, promiseInstagram]).then(function() {
+    //   console.log(results);
+    // });
+
+    // 3.
+
+    var promise = Promise.resolve();
+
+    URLS.forEach(function(url) {
+      promise = promise.then(function() {
+        var jsonPromise = getJSON(url);
+        jsonPromise.then(function(response) {
+          results.push(response);
+        });
+        return jsonPromise;
+      });
+    });
+
+    promise.then(function() {
+      console.log(results);
+    });
+
+    // getJSON(URLS[0], function(e, response){
+    //   results.push(response);
+      
+    //   getJSON(URLS[1], function(e, response) {
+    //     results.push(response);
+        
+    //     getJSON(URLS[2], function(e, response) {
+    //       results.push(response);
+          
+    //       getJSON(URLS[3], function(e, response) {
+    //         results.push(response);
+    //         console.log(results);
+    //       });
+    //     });
+    //   });
+    // });
+  </script>
+</body>
+</html>
