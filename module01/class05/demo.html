@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <script type="text/javascript" src="last_fm.js"></script>
+  <script type="text/javascript">
+    LastFM.init('0da66f1a155b735b2d39d3c6f250f9ee');
+
+    LastFM.getSimilarTracks({
+      artist: 'Dion & The Belmonts',
+      track: 'Runaround Sue'
+    }).then(function(results) {
+      console.log(results);
+    });
+  </script>
+</body>
+</html>
