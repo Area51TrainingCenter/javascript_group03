@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RequireJS</title>
+</head>
+<body>
+  <script type="text/javascript" data-main="lib/main" src="require.js"></script>
+  <script type="text/javascript">
+    requirejs.config({
+      urlArgs: 'timestamp=' + Date.now(),
+      paths: {
+        jquery: [
+          'http://code.jquery.com/jquery-1.11.0.min',
+          'lib/jquery'
+        ],
+        moment: 'http://momentjs.com/downloads/moment-with-langs.min',
+        store: 'http://marcuswestin.github.io/store.js/store'
+      }
+    });
+  </script>
+</body>
+</html>
