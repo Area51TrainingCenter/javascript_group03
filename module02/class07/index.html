@@ -5,6 +5,10 @@
   <title></title>
 </head>
 <body>
+  <div id="users">
+    <a href="#" id="new_user">New user</a>
+    <ul></ul>
+  </div>
   <script type="text/javascript" src="libs/underscore.js"></script>
   <script type="text/javascript" src="libs/jquery.js"></script>
   <script type="text/javascript" src="libs/backbone.js"></script>
@@ -73,6 +77,53 @@
     users.on('remove', function(model, collection) {
       console.log('remove', model, collection);
     });
+
+    var UsersView = Backbone.View.extend({
+      el: '#users',
+      events: {
+        'click #new_user': 'newUser'
+      },
+      initialize: function() {
+        this.listenTo(this.collection, 'add', this.addNewUser);
+      },
+      newUser: function(e) {
+        e.preventDefault();
+
+        var firstName = prompt('Ingrese nombre');
+
+        if (firstName.trim() !== '') {
+          this.collection.add({
+            firstName: firstName
+          });
+        }
+      },
+      addNewUser: function(model, collection) {
+        this.$el.find('ul').append('<li><a href="#users/' + this.collection.indexOf(model) + '">' + model.get('firstName') + '</a></li>');
+      }
+    });
+
+    var view = new UsersView({
+      collection: new Users([{
+        firstName: 'Gustavo'
+      }])
+    });
+
+    var UserRouter = Backbone.Router.extend({
+      routes: {
+        '': 'index',
+        'users/:index': 'show'
+      },
+      index: function() {
+        view.collection.each(view.addNewUser.bind(view));
+      },
+      show: function(index) {
+        alert(view.collection.at(index).get('firstName'));
+      }
+    });
+
+    var router = new UserRouter();
+
+    Backbone.history.start();
   </script>
 </body>
 </html>
