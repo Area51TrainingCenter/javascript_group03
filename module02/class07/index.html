@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+</head>
+<body>
+  <script type="text/javascript" src="libs/underscore.js"></script>
+  <script type="text/javascript" src="libs/jquery.js"></script>
+  <script type="text/javascript" src="libs/backbone.js"></script>
+  <script type="text/javascript">
+    Backbone.sync = function(method, model, options) {
+      switch(method) {
+        case 'create':
+          var id = Date.now().toString() + Math.ceil(Math.random()*100);
+
+          model.set('id', id);
+
+          localStorage.setItem(model.get('id'), JSON.stringify(model.toJSON()));
+        break;
+        case 'update':
+          localStorage.setItem(model.get('id'), JSON.stringify(model.toJSON()));
+        break;
+        case 'delete':
+          localStorage.removeItem(model.get('id'));
+        break;
+        default:
+          console.log(method, model, options);
+        break;
+      }
+    };
+
+    var User = Backbone.Model.extend({
+      urlRoot: '/users',
+      defaults: {
+        firstName: '',
+        lastName: '',
+        age: undefined,
+        email: ''
+      },
+      validate: function(attributes, options) {
+        var validationErrors = [];
+
+        if (attributes.age === undefined) {
+          validationErrors.push('La edad debe tener un valor numérico');
+        }
+
+        if (attributes.email.indexOf('@') === -1) {
+          validationErrors.push('El correo debe tener un formato válido');
+        }
+
+        if (validationErrors.length > 0) {
+          return validationErrors;
+        }
+      }
+    });
+
+    var Users = Backbone.Collection.extend({
+      url: '/users',
+      model: User
+    });
+
+    var users = new Users();
+
+    users.on('change', function(model) {
+      console.log(model);
+    });
+
+    users.on('add', function(model, collection) {
+      console.log('add', model, collection);
+    });
+
+    users.on('remove', function(model, collection) {
+      console.log('remove', model, collection);
+    });
+  </script>
+</body>
+</html>
