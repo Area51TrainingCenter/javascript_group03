@@ -1,0 +1,35 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: 'Lato';
+}
+
+a {
+  text-decoration: none;
+}
+
+#main_nav {
+  width: 100%;
+  background: #c0392b;
+}
+
+#main_nav a {
+  display: inline-block;
+  color: #fff;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding: 20px;
+}
+
+#main_nav a:hover, #main_nav a.selected {
+  background: #e74c3c;
+}

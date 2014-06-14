@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Last.FM Charts</title>
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="layout.css">
+</head>
+<body>
+  <nav id="main_nav">
+    <a href="#top_tracks">Top tracks</a>
+    <a href="#top_tracks">Top artists</a>
+  </nav>
+  <!-- Utilizamos RequireJS para cargar módulos a demanda -->
+  <script type="text/javascript" src="libs/require.js" data-main="app"></script>
+  <script type="text/javascript">
+    // la configuración de RequireJS permite definir alias para los archivos que utilizamos a menudo, como bibliotecas externas
+    requirejs.config({
+      paths: {
+        jquery: 'libs/jquery',
+        backbone: 'libs/backbone',
+        underscore: 'libs/underscore',
+        last_fm: 'libs/last_fm'
+      }
+    });
+  </script>
+</body>
+</html>
