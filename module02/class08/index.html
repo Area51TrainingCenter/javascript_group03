@@ -9,13 +9,17 @@
 <body>
   <nav id="main_nav">
     <a href="#top_tracks">Top tracks</a>
-    <a href="#top_tracks">Top artists</a>
+    <a href="#top_artists">Top artists</a>
   </nav>
+  
+  <div id="content"></div>
+  
   <!-- Utilizamos RequireJS para cargar módulos a demanda -->
   <script type="text/javascript" src="libs/require.js" data-main="app"></script>
   <script type="text/javascript">
     // la configuración de RequireJS permite definir alias para los archivos que utilizamos a menudo, como bibliotecas externas
     requirejs.config({
+      urlArgs: 'timestamp=' + Date.now(),
       paths: {
         jquery: 'libs/jquery',
         backbone: 'libs/backbone',
